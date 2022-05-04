@@ -34,21 +34,20 @@ public class ViewLayer {
         Scanner scanner = new Scanner( System.in );
         System.out.println( "Firstly, you need to choose the source file." );
         System.out.println( "File should be in resources directory of program." );
-        System.out.println( "Type in the name of the file (extension must be either .ser or .json) : " );
+        System.out.println( "Type in the name of the file (extension must be .json) : " );
 
         File file = null;
         while(true) {
             String fileName = scanner.nextLine();
 
-            boolean canStop = FileNameHelper.getFileExtension(fileName).equals("ser");
-            canStop = canStop || FileNameHelper.getFileExtension(fileName).equals("json");
-            canStop = canStop && Files.exists( Path.of(RESOURCES_FILES_PREFIX + fileName) );
+            boolean canStop = FileNameHelper.getFileExtension(fileName).equals("json")
+                    && Files.exists( Path.of(RESOURCES_FILES_PREFIX + fileName) );
 
             if( canStop ){
                 file = new File( RESOURCES_FILES_PREFIX + fileName );
                 break;
             }else{
-                System.out.println("Extension must be either .ser or .json and file should exist in folder resources!");
+                System.out.println("Extension must be .json and file should exist in folder resources!");
                 System.out.println(REWRITE_PLEASE);
             }
         }
@@ -148,7 +147,8 @@ public class ViewLayer {
         Scanner scanner = new Scanner( System.in );
 
         while( true ){
-            System.out.println( "Do you want to save the result of your computation? Print 'yes' or 'no' (without quotes)." );
+            System.out.println( "Do you want to save the result of your computation? " +
+                    "Print 'yes' or 'no' (without quotes)." );
             String value = scanner.nextLine();
 
             boolean cycleCanStop = false;

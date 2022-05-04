@@ -2,8 +2,7 @@ package kpi.third.term.java.lab.customers.models.entities;
 
 import java.io.Serializable;
 
-public class Customer implements Comparable, Serializable {
-    static final long serialVersionUID = 1337L;
+public class Customer implements Comparable {
     private String firstName;
     private String secondName;
     private String fathersName;

@@ -4,8 +4,6 @@ import kpi.third.term.java.lab.customers.controllers.service.CustomerService;
 import kpi.third.term.java.lab.customers.models.entities.Customer;
 import kpi.third.term.java.lab.customers.models.repositories.JSONModel;
 import kpi.third.term.java.lab.customers.models.repositories.ModelLayer;
-import kpi.third.term.java.lab.customers.models.repositories.SerializationModel;
-import kpi.third.term.java.lab.customers.utilities.FileNameHelper;
 import kpi.third.term.java.lab.customers.utilities.OperationType;
 import kpi.third.term.java.lab.customers.views.ViewLayer;
 
@@ -30,10 +28,6 @@ public class Controller {
         view.printMessage( ViewLayer.HELLO_MESSAGE );
 
         File inputFile = view.resolveInputFile();
-        System.out.println( inputFile.getAbsolutePath() );
-
-        String fileExtension = FileNameHelper.getFileExtension( inputFile.getName() );
-        modelInitialization( fileExtension );
 
         view.printMessage( ViewLayer.CUSTOMERS_LIST_FETCHED_MESSAGE );
         List<Customer> customers = model.findAll( inputFile );
@@ -63,14 +57,6 @@ public class Controller {
 
         }while( view.performAnotherOperation() );
 
-    }
-
-
-    private void modelInitialization(String fileExtension){
-        model = switch ( fileExtension ){
-            case "ser" -> new SerializationModel();
-            default -> new JSONModel();
-        };
     }
 
 
