@@ -13,23 +13,25 @@ public class JsonParser {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
 
-    public String convertToJson(List<Customer> customers) {
+    public String convertListOfCustomersToJson(List<Customer> customers) {
         String s = "";
         try{
             s = objectMapper.writeValueAsString( customers );
         }catch(JsonProcessingException e){
             System.out.println("Cannot cast from object to json " +  e.getMessage());
+            System.exit( -1 );
         }
         return s;
     }
 
 
-    public List<Customer> jsonToObject(String json) {
+    public List<Customer> jsonToListOfCustomers(String json) {
         List<Customer> result = new ArrayList<>();
         try {
             result = objectMapper.readValue( json, new TypeReference<List<Customer>>(){} );
         }catch(JsonProcessingException e){
             System.out.println("Cannot cast from json to object" +  e.getMessage());
+            System.exit( -1 );
         }
         return result;
     }

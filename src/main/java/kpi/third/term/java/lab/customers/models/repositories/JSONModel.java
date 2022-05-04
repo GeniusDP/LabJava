@@ -25,7 +25,7 @@ public class JSONModel implements ModelLayer {
                     .reduce( (accumulator, currentValue) -> accumulator + currentValue )
                     .orElse( "" );
 
-            lst = jsonParser.jsonToObject( wholeFile );
+            lst = jsonParser.jsonToListOfCustomers( wholeFile );
         } catch (IOException e){
             System.out.println( e );
         }
