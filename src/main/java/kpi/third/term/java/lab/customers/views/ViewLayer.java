@@ -25,7 +25,7 @@ public class ViewLayer {
 
     public void printCustomerList(List<Customer> customers) {
         System.out.println( "This is a list of customers you needed:" );
-        customers.forEach( s -> System.out.println( s ));
+        customers.forEach( System.out::println );
     }
 
 
@@ -107,7 +107,7 @@ public class ViewLayer {
             }
 
             if( cycleCanStop ){
-                System.out.println("OK. You have chosen operation type " + value + "!");
+                System.out.println("OK. You have chosen operation type '" + value + "'!");
                 return value.equals( "yes" );
             }
         }
@@ -121,7 +121,7 @@ public class ViewLayer {
         System.out.println("Write, please, left bound of range.");
 
         while( !scanner.hasNextInt() ){
-            System.out.println("You have to insert a long number!");
+            System.out.println("You have to insert a long-type number!");
             scanner.next();
         }
 
@@ -135,7 +135,7 @@ public class ViewLayer {
         System.out.println("Write, please, right bound of range.");
 
         while( !scanner.hasNextInt() ){
-            System.out.println("You have to insert a long number!");
+            System.out.println("You have to insert a long-type number!");
             scanner.next();
         }
 
