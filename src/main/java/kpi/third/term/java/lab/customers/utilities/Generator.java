@@ -1,4 +1,4 @@
-package kpi.third.term.java.lab.customers.controllers;
+package kpi.third.term.java.lab.customers.utilities;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
