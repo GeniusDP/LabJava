@@ -1,5 +1,6 @@
 package kpi.third.term.java.lab.customers.controllers.service;
 
+import kpi.third.term.java.lab.customers.exceptions.JsonParserException;
 import kpi.third.term.java.lab.customers.models.entities.Customer;
 import kpi.third.term.java.lab.customers.utilities.JsonParser;
 
@@ -34,6 +35,8 @@ public class CustomerService {
         }catch(IOException e){
             String msg = "Error during saving result into file " + fileToSave.getAbsolutePath() + " : " + e.getMessage();
             System.out.println( msg );
+        } catch (JsonParserException e) {
+            System.out.println( e.getMessage() );
         }
 
     }

@@ -1,7 +1,7 @@
 package kpi.third.term.java.lab.customers.utilities;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import kpi.third.term.java.lab.customers.exceptions.JsonParserException;
 import kpi.third.term.java.lab.customers.models.entities.Customer;
 import kpi.third.term.java.lab.customers.models.repositories.JSONModel;
 import kpi.third.term.java.lab.customers.models.repositories.ModelLayer;
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Generator {
 
-    public static void main(String[] args) throws JsonProcessingException {
+    public static void main(String[] args) throws JsonParserException {
         JsonParser jsonParser = new JsonParser();
         ModelLayer modelLayer = new JSONModel();
         File file = new File( "src/main/resources/input.json" );

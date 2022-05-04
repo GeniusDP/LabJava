@@ -1,5 +1,6 @@
 package kpi.third.term.java.lab.customers.models.repositories;
 
+import kpi.third.term.java.lab.customers.exceptions.JsonParserException;
 import kpi.third.term.java.lab.customers.models.entities.Customer;
 import kpi.third.term.java.lab.customers.utilities.JsonParser;
 
@@ -30,6 +31,8 @@ public class JSONModel implements ModelLayer {
             lst = jsonParser.jsonToListOfCustomers( wholeFile );
         } catch (IOException e){
             System.out.println( e );
+        } catch (JsonParserException e) {
+            System.out.println( e.getMessage() );
         }
 
         return lst;
