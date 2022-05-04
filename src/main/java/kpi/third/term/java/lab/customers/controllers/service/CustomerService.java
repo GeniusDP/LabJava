@@ -1,7 +1,11 @@
-package kpi.third.term.java.lab.customers.controllers;
+package kpi.third.term.java.lab.customers.controllers.service;
 
 import kpi.third.term.java.lab.customers.models.entities.Customer;
+import kpi.third.term.java.lab.customers.utilities.JsonParser;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -21,4 +25,16 @@ public class CustomerService {
     }
 
 
+    public void saveListOfCustomersToFile(File fileToSave, List<Customer> customers) {
+
+        try( PrintWriter printWriter = new PrintWriter( fileToSave ) ){
+            JsonParser jsonParser = new JsonParser();
+            String json = jsonParser.convertListOfCustomersToJson( customers );
+            printWriter.print( json );
+        }catch(IOException e){
+            String msg = "Error during saving result into file " + fileToSave.getAbsolutePath() + " : " + e.getMessage();
+            System.out.println( msg );
+        }
+
+    }
 }

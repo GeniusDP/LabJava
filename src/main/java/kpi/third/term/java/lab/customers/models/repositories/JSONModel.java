@@ -19,8 +19,10 @@ public class JSONModel implements ModelLayer {
 
 
         List<Customer> lst = new ArrayList<>();
-        try( FileReader reader = new FileReader( file );
-                Scanner scanner = new Scanner( reader ) ) {
+        try(
+            FileReader reader = new FileReader( file );
+            Scanner scanner = new Scanner( reader );
+        ){
             String wholeFile = Files.lines( file.toPath() )
                     .reduce( (accumulator, currentValue) -> accumulator + currentValue )
                     .orElse( "" );

@@ -1,5 +1,6 @@
 package kpi.third.term.java.lab.customers.controllers;
 
+import kpi.third.term.java.lab.customers.controllers.service.CustomerService;
 import kpi.third.term.java.lab.customers.models.entities.Customer;
 import kpi.third.term.java.lab.customers.models.repositories.JSONModel;
 import kpi.third.term.java.lab.customers.models.repositories.ModelLayer;
@@ -9,7 +10,6 @@ import kpi.third.term.java.lab.customers.utilities.OperationType;
 import kpi.third.term.java.lab.customers.views.ViewLayer;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
@@ -21,6 +21,7 @@ public class Controller {
 
     public Controller(){
         view = new ViewLayer();
+        model = new JSONModel();
         service = new CustomerService();
     }
 
@@ -45,12 +46,20 @@ public class Controller {
                 case CARD_NUMBER_RANGE -> {
                     long leftBound = view.getLeftBoundOfRange();
                     long rightBound = view.getRightBoundOfRange();
-                    System.out.println(leftBound);
-                    System.out.println(rightBound);
                     yield service.getCustomersByCardNumberInRange(customers, leftBound, rightBound);
                 }
             };
             view.printCustomerList( currentCustomersList );
+
+            boolean savingDesired = view.saveDialog();
+
+            if( savingDesired ){
+                File fileToSave = view.saveFileGetting();
+                if( fileToSave != null ){
+                    service.saveListOfCustomersToFile(fileToSave, currentCustomersList);
+                    view.printMessage( ViewLayer.EVERYTHING_SAVED  );
+                }
+            }
 
         }while( view.performAnotherOperation() );
 

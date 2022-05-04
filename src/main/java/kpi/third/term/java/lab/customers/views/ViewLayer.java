@@ -14,6 +14,7 @@ public class ViewLayer {
 
     public static final String HELLO_MESSAGE = "Hello, this is program.";
     public static final String CUSTOMERS_LIST_FETCHED_MESSAGE = "Those are all customers, fetched from storage:";
+    public static final String EVERYTHING_SAVED = "Data has been saved successfully!";
 
     private static final String REWRITE_PLEASE = "Rewrite please!";
     private static final String RESOURCES_FILES_PREFIX = "src/main/resources/";
@@ -140,6 +141,81 @@ public class ViewLayer {
         }
 
         return scanner.nextInt();
+    }
+
+
+    public boolean saveDialog() {
+        Scanner scanner = new Scanner( System.in );
+
+        while( true ){
+            System.out.println( "Do you want to save the result of your computation? Print 'yes' or 'no' (without quotes)." );
+            String value = scanner.nextLine();
+
+            boolean cycleCanStop = false;
+
+
+            switch( value ){
+                case "no", "yes" -> {
+                    cycleCanStop = true;
+                }
+                default -> {
+                    System.out.println("Wrong! You have written '" + value + "' ");
+                    System.out.println("You should choose either 'yes' or 'no' no continue or not respectively.");
+                    System.out.println(REWRITE_PLEASE);
+                }
+            }
+
+            if( cycleCanStop ){
+                System.out.println("OK. You have chosen operation type '" + value + "'!");
+                return value.equals( "yes" );
+            }
+        }
+
+    }
+
+
+    public File saveFileGetting() {
+        Scanner scanner = new Scanner( System.in );
+        File fileToSave = null;
+        while( true ){
+            System.out.println( "You desired to save data into the file. " +
+                    "Are you still desired? Write 'yes' or 'no' (without quotes)." );
+            String value = scanner.nextLine();
+
+            boolean cycleCanStop = false;
+
+            switch( value ){
+                case "no", "yes" -> {
+                    cycleCanStop = true;
+                }
+                default -> {
+                    System.out.println("Wrong! You have written '" + value + "' ");
+                    System.out.println("You should choose either 'yes' or 'no' no continue or not respectively.");
+                    System.out.println(REWRITE_PLEASE);
+                }
+            }
+
+            if( cycleCanStop ){
+                if( value.equals( "yes" ) ){
+                    System.out.println( "OK. Now you need to type in name of the file." );
+                    fileToSave = inputFileNameToSaveCustomerList();
+                }else{
+                    System.out.println( "Dismissing of saving current data to file was done successfully" );
+                }
+                break;
+            }
+        }
+        return fileToSave;
+    }
+
+
+    private File inputFileNameToSaveCustomerList(){
+        Scanner scanner = new Scanner( System.in );
+        System.out.println( "Type in name of the file and press enter " +
+                "( file will be placed in src/main/resources directory ) : " );
+        System.out.println("!!!Notice: write name without extension. It will be automatically set to .json.");
+        String fileName = scanner.nextLine();
+        return new File(RESOURCES_FILES_PREFIX + fileName + ".json");
     }
 
 
