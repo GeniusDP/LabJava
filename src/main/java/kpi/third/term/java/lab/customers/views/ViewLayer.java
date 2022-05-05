@@ -18,6 +18,7 @@ public class ViewLayer {
 
     private static final String REWRITE_PLEASE = "Rewrite please!";
     private static final String RESOURCES_FILES_PREFIX = "src/main/resources/";
+    private final Scanner scanner = new Scanner( System.in );
 
     public void printMessage(String message) {
         System.out.println( message );
@@ -31,7 +32,7 @@ public class ViewLayer {
 
 
     public File resolveInputFile() {
-        Scanner scanner = new Scanner( System.in );
+
         System.out.println( "Firstly, you need to choose the source file." );
         System.out.println( "File should be in resources directory of program." );
         System.out.println( "Type in the name of the file (extension must be .json) : " );
@@ -57,7 +58,6 @@ public class ViewLayer {
 
 
     public OperationType getOperationType() {
-        Scanner scanner = new Scanner( System.in );
         while( true ){
             System.out.println("Write please type of operation needed.");
             System.out.println("Write 'range' (without quotes) - customers in range by card number");
@@ -86,7 +86,6 @@ public class ViewLayer {
 
 
     public boolean performAnotherOperation() {
-        Scanner scanner = new Scanner( System.in );
         while( true ){
             System.out.println("Write, please, 'yes' if you want to perform another " +
                     "operation to start list or 'no' in another case.");
@@ -116,7 +115,6 @@ public class ViewLayer {
 
 
     public long getLeftBoundOfRange() {
-        Scanner scanner = new Scanner( System.in );
 
         System.out.println("Write, please, left bound of range.");
 
@@ -130,7 +128,6 @@ public class ViewLayer {
 
 
     public long getRightBoundOfRange() {
-        Scanner scanner = new Scanner( System.in );
 
         System.out.println("Write, please, right bound of range.");
 
@@ -144,7 +141,6 @@ public class ViewLayer {
 
 
     public boolean saveDialog() {
-        Scanner scanner = new Scanner( System.in );
 
         while( true ){
             System.out.println( "Do you want to save the result of your computation? " +
@@ -175,7 +171,6 @@ public class ViewLayer {
 
 
     public File saveFileGetting() {
-        Scanner scanner = new Scanner( System.in );
         File fileToSave = null;
         while( true ){
             System.out.println( "You desired to save data into the file. " +
@@ -210,7 +205,6 @@ public class ViewLayer {
 
 
     private File inputFileNameToSaveCustomerList(){
-        Scanner scanner = new Scanner( System.in );
         System.out.println( "Type in name of the file and press enter " +
                 "( file will be placed in src/main/resources directory ) : " );
         System.out.println("!!!Notice: write name without extension. It will be automatically set to .json.");
