@@ -50,7 +50,7 @@ public class Controller {
             if( savingDesired ){
                 File fileToSave = view.saveFileGetting();
                 if( fileToSave != null ){
-                    model.saveListOfCustomersToFile(fileToSave, currentCustomersList);
+                    model.saveAll(fileToSave, currentCustomersList);
                     view.printMessage( ViewLayer.EVERYTHING_SAVED  );
                 }
             }
