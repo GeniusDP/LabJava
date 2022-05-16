@@ -23,8 +23,10 @@ public class FileProcessor {
             lst = jsonParser.jsonToListOfCustomers( wholeFile );
         } catch (IOException e){
             System.out.println( e );
+            System.exit(1337);
         } catch (JsonParserException e) {
             System.out.println( e.getMessage() );
+            System.exit(1337);
         }
         return lst;
     }
@@ -39,9 +41,11 @@ public class FileProcessor {
         }catch(IOException e){
             String msg = "Error during saving result into file " + fileToSave.getAbsolutePath() + " : " + e.getMessage();
             System.out.println( msg );
+            System.exit(1337);
         } catch (JsonParserException e) {
             System.out.println( e.getMessage() );
+            System.exit(1337);
         }
-        
+
     }
 }
