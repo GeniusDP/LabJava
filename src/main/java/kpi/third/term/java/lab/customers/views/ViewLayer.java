@@ -106,8 +106,9 @@ public class ViewLayer {
             System.out.println("You have to insert a long-type number!");
             scanner.next();
         }
-
-        return scanner.nextInt();
+        int result = scanner.nextInt();
+        scanner.nextLine();
+        return result;
     }
 
 

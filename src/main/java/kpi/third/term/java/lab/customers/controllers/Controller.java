@@ -6,6 +6,8 @@ import kpi.third.term.java.lab.customers.models.repositories.JSONModel;
 import kpi.third.term.java.lab.customers.models.repositories.ModelLayer;
 import kpi.third.term.java.lab.customers.utilities.OperationType;
 import kpi.third.term.java.lab.customers.views.ViewLayer;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileReader;
@@ -20,13 +22,13 @@ public class Controller {
     private final CustomerService service;
     private final File inputFile;
 
-
+    private static final Logger logger = LogManager.getLogger(Controller.class);
     public Controller(){
         Properties properties = new Properties();
         try {
             properties.load(new FileReader("src/main/resources/application.properties"));
         } catch (IOException e) {
-            System.out.println( "File reading exception ( application.properties ) : " + e );
+            logger.error( "File reading exception ( application.properties ) : " + e );
             System.exit(1337);
         }
         view = new ViewLayer();

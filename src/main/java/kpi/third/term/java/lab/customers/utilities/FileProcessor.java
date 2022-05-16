@@ -1,7 +1,10 @@
 package kpi.third.term.java.lab.customers.utilities;
 
+import kpi.third.term.java.lab.customers.controllers.MainController;
 import kpi.third.term.java.lab.customers.exceptions.JsonParserException;
 import kpi.third.term.java.lab.customers.models.entities.Customer;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileProcessor {
+
+    private static final Logger logger = LogManager.getLogger(FileProcessor.class);
 
     public List<Customer> getAllCustomersFromFile(File file) {
         JsonParser jsonParser = new JsonParser();
@@ -22,10 +27,10 @@ public class FileProcessor {
 
             lst = jsonParser.jsonToListOfCustomers( wholeFile );
         } catch (IOException e){
-            System.out.println( e );
+            logger.error( "Error in FileProcessor.getAllCustomersFromFile : IOException." );
             System.exit(1337);
         } catch (JsonParserException e) {
-            System.out.println( e.getMessage() );
+            logger.error( e.getMessage() );
             System.exit(1337);
         }
         return lst;
@@ -40,10 +45,10 @@ public class FileProcessor {
             printWriter.print( json );
         }catch(IOException e){
             String msg = "Error during saving result into file " + fileToSave.getAbsolutePath() + " : " + e.getMessage();
-            System.out.println( msg );
+            logger.error( msg );
             System.exit(1337);
         } catch (JsonParserException e) {
-            System.out.println( e.getMessage() );
+            logger.error( e.getMessage() );
             System.exit(1337);
         }
 
