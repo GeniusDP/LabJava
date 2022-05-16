@@ -1,12 +1,9 @@
 package kpi.third.term.java.lab.customers.views;
 
 import kpi.third.term.java.lab.customers.models.entities.Customer;
-import kpi.third.term.java.lab.customers.utilities.FileNameHelper;
 import kpi.third.term.java.lab.customers.utilities.OperationType;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Scanner;
 
@@ -28,32 +25,6 @@ public class ViewLayer {
     public void printCustomerList(List<Customer> customers) {
         System.out.println( "This is a list of customers you needed:" );
         customers.forEach( System.out::println );
-    }
-
-
-    public File resolveInputFile() {
-
-        System.out.println( "Firstly, you need to choose the source file." );
-        System.out.println( "File should be in resources directory of program." );
-        System.out.println( "Type in the name of the file (extension must be .json) : " );
-
-        File file = null;
-        while(true) {
-            String fileName = scanner.nextLine();
-
-            boolean canStop = FileNameHelper.getFileExtension(fileName).equals("json")
-                    && Files.exists( Path.of(RESOURCES_FILES_PREFIX + fileName) );
-
-            if( canStop ){
-                file = new File( RESOURCES_FILES_PREFIX + fileName );
-                break;
-            }else{
-                System.out.println("Extension must be .json and file should exist in folder resources!");
-                System.out.println(REWRITE_PLEASE);
-            }
-        }
-        System.out.println("OK. File was found! " );
-        return file;
     }
 
 
@@ -135,8 +106,9 @@ public class ViewLayer {
             System.out.println("You have to insert a long-type number!");
             scanner.next();
         }
-
-        return scanner.nextInt();
+        int result = scanner.nextInt();
+        scanner.nextLine();
+        return result;
     }
 
 

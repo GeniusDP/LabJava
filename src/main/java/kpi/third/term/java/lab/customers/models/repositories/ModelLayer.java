@@ -9,6 +9,6 @@ public interface ModelLayer {
 
     List<Customer> findAll(File file);
 
-    void saveListOfCustomersToFile(File fileToSave, List<Customer> customers);
+    void saveAll(File fileToSave, List<Customer> customers);
 
 }
