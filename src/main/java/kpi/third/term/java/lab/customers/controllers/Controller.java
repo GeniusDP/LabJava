@@ -2,8 +2,7 @@ package kpi.third.term.java.lab.customers.controllers;
 
 import kpi.third.term.java.lab.customers.models.service.CustomerService;
 import kpi.third.term.java.lab.customers.models.entities.Customer;
-import kpi.third.term.java.lab.customers.models.repositories.JSONModel;
-import kpi.third.term.java.lab.customers.models.repositories.ModelLayer;
+import kpi.third.term.java.lab.customers.models.repositories.JSONRepository;
 import kpi.third.term.java.lab.customers.models.utilities.OperationType;
 import kpi.third.term.java.lab.customers.views.ViewLayer;
 import org.apache.log4j.LogManager;
@@ -17,11 +16,8 @@ import java.util.Properties;
 
 public class Controller {
 
-    private final ModelLayer model;
     private final ViewLayer view;
     private final CustomerService service;
-    private final File inputFile;
-
     private static final Logger logger = LogManager.getLogger(Controller.class);
 
     public Controller(){
@@ -34,27 +30,27 @@ public class Controller {
             System.exit(1337);
         }
         view = new ViewLayer();
-        model = new JSONModel();
-        service = new CustomerService();
-        inputFile = new File( properties.getProperty("main-file-path") );
+        service = new CustomerService( new JSONRepository( new File( properties.getProperty("main-file-path") ) ) );
     }
 
 
     public void start() {
         logger.info("Application has been started.");
         view.printMessage( ViewLayer.HELLO_MESSAGE );
-
         view.printMessage( ViewLayer.CUSTOMERS_LIST_FETCHED_MESSAGE );
-        view.printCustomerList( model.findAll( inputFile ) );
+
+        view.printCustomerList( service.findAll( ) );
+
 
         do{
             OperationType operationType = view.getOperationType();
             List<Customer> currentCustomersList = switch( operationType ){
-                case ALPHABETIC_ORDER -> service.getCustomersInAlphabeticOrder(model.findAll( inputFile ));
+
+                case ALPHABETIC_ORDER -> service.getCustomersInAlphabeticOrder();
                 case CARD_NUMBER_RANGE -> {
                     long leftBound = view.getLeftBoundOfRange();
                     long rightBound = view.getRightBoundOfRange();
-                    yield service.getCustomersByCardNumberInRange(model.findAll( inputFile ), leftBound, rightBound);
+                    yield service.getCustomersByCardNumberInRange(leftBound, rightBound);
                 }
             };
             view.printCustomerList( currentCustomersList );
@@ -62,11 +58,10 @@ public class Controller {
             boolean savingDesired = view.saveDialog();
 
             if( savingDesired ){
-                //засунуть в сервис
                 File fileToSave = view.saveFileGetting();
                 if( fileToSave != null ){
                     logger.info("Result of current computation saved.");
-                    model.saveAll(fileToSave, currentCustomersList);
+                    service.saveAll(fileToSave, currentCustomersList);
                     view.printMessage( ViewLayer.EVERYTHING_SAVED  );
                 }
             }

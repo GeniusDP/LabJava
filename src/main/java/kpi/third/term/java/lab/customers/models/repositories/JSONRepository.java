@@ -6,17 +6,18 @@ import kpi.third.term.java.lab.customers.models.utilities.FileProcessor;
 import java.io.File;
 import java.util.List;
 
-public class JSONModel implements ModelLayer {
+public class JSONRepository extends Repository {
 
     private final FileProcessor fileProcessor;
 
-    public JSONModel(){
+    public JSONRepository(File dataSource){
+        super(dataSource);
         fileProcessor = new FileProcessor();
     }
 
     @Override
-    public List<Customer> findAll(File file) {
-        return fileProcessor.getAllCustomersFromFile( file );
+    public List<Customer> findAll() {
+        return fileProcessor.getAllCustomersFromFile( this.dataSource );
     }
 
     @Override
