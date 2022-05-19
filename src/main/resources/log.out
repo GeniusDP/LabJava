@@ -4,3 +4,8 @@
 [main] => [FATAL] 2022-05-19 kpi.third.term.java.lab.customers.controllers.Controller  - File reading exception ( application.properties ) : java.io.FileNotFoundException: src\main\resources\applications.properties (Не удается найти указанный файл)
 [main] => [DEBUG] 2022-05-19 kpi.third.term.java.lab.customers.controllers.Controller  - Initialization of project started.
 [main] => [DEBUG] 2022-05-19 kpi.third.term.java.lab.customers.controllers.Controller  - Application has been started.
+[main] => [DEBUG] 2022-05-19 kpi.third.term.java.lab.customers.controllers.Controller  - Initialization of project started.
+[main] => [INFO] 2022-05-19 kpi.third.term.java.lab.customers.controllers.Controller  - Application has been started.
+[main] => [DEBUG] 2022-05-19 kpi.third.term.java.lab.customers.controllers.Controller  - Initialization of project started.
+[main] => [INFO] 2022-05-19 kpi.third.term.java.lab.customers.controllers.Controller  - Application has been started.
+[main] => [INFO] 2022-05-19 kpi.third.term.java.lab.customers.controllers.Controller  - Application has been finished successfully.

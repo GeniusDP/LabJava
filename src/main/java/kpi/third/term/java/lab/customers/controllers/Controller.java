@@ -41,11 +41,9 @@ public class Controller {
 
         view.printCustomerList( service.findAll( ) );
 
-
         do{
             OperationType operationType = view.getOperationType();
             List<Customer> currentCustomersList = switch( operationType ){
-
                 case ALPHABETIC_ORDER -> service.getCustomersInAlphabeticOrder();
                 case CARD_NUMBER_RANGE -> {
                     long leftBound = view.getLeftBoundOfRange();
