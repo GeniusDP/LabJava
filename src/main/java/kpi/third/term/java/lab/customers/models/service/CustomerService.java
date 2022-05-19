@@ -2,7 +2,6 @@ package kpi.third.term.java.lab.customers.models.service;
 
 import kpi.third.term.java.lab.customers.models.entities.Customer;
 import kpi.third.term.java.lab.customers.models.repositories.Repository;
-
 import java.io.File;
 import java.util.List;
 import java.util.function.Predicate;
@@ -35,10 +34,6 @@ public class CustomerService {
 
     public void saveAll(File fileToSave, List<Customer> currentCustomersList) {
         repository.saveAll(fileToSave, currentCustomersList);
-    }
-
-    public Repository getRepository() {
-        return repository;
     }
 
 

@@ -3,7 +3,6 @@ package kpi.third.term.java.lab.customers.controllers;
 import kpi.third.term.java.lab.customers.models.service.CustomerService;
 import kpi.third.term.java.lab.customers.models.entities.Customer;
 import kpi.third.term.java.lab.customers.models.repositories.JSONRepository;
-import kpi.third.term.java.lab.customers.models.repositories.Repository;
 import kpi.third.term.java.lab.customers.models.utilities.OperationType;
 import kpi.third.term.java.lab.customers.views.ViewLayer;
 import org.apache.log4j.LogManager;
