@@ -1,7 +1,7 @@
 package kpi.third.term.java.lab.customers.models.repositories;
 
 import kpi.third.term.java.lab.customers.models.entities.Customer;
-import kpi.third.term.java.lab.customers.utilities.FileProcessor;
+import kpi.third.term.java.lab.customers.models.utilities.FileProcessor;
 
 import java.io.File;
 import java.util.List;

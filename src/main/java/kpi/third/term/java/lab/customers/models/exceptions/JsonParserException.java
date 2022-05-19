@@ -1,4 +1,4 @@
-package kpi.third.term.java.lab.customers.exceptions;
+package kpi.third.term.java.lab.customers.models.exceptions;
 
 public class JsonParserException extends Throwable {
 

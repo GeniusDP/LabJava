@@ -1,7 +1,7 @@
 package kpi.third.term.java.lab.customers.views;
 
 import kpi.third.term.java.lab.customers.models.entities.Customer;
-import kpi.third.term.java.lab.customers.utilities.OperationType;
+import kpi.third.term.java.lab.customers.models.utilities.OperationType;
 
 import java.io.File;
 import java.util.List;
@@ -156,15 +156,15 @@ public class ViewLayer {
                     cycleCanStop = true;
                 }
                 default -> {
-                    System.out.println("Wrong! You have written '" + value + "' ");
-                    System.out.println("You should choose either 'yes' or 'no' no continue or not respectively.");
-                    System.out.println(REWRITE_PLEASE);
+                    printMessage("Wrong! You have written '" + value + "' ");
+                    printMessage("You should choose either 'yes' or 'no' no continue or not respectively.");
+                    printMessage(REWRITE_PLEASE);
                 }
             }
 
             if( cycleCanStop ){
                 if( value.equals( "yes" ) ){
-                    System.out.println( "OK. Now you need to type in name of the file." );
+                    printMessage( "OK. Now you need to type in name of the file." );
                     fileToSave = inputFileNameToSaveCustomerList();
                 }else{
                     System.out.println( "Dismissing of saving current data to file was done successfully" );

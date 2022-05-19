@@ -1,10 +1,10 @@
 package kpi.third.term.java.lab.customers.controllers;
 
-import kpi.third.term.java.lab.customers.controllers.service.CustomerService;
+import kpi.third.term.java.lab.customers.models.service.CustomerService;
 import kpi.third.term.java.lab.customers.models.entities.Customer;
 import kpi.third.term.java.lab.customers.models.repositories.JSONModel;
 import kpi.third.term.java.lab.customers.models.repositories.ModelLayer;
-import kpi.third.term.java.lab.customers.utilities.OperationType;
+import kpi.third.term.java.lab.customers.models.utilities.OperationType;
 import kpi.third.term.java.lab.customers.views.ViewLayer;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -45,17 +45,16 @@ public class Controller {
         view.printMessage( ViewLayer.HELLO_MESSAGE );
 
         view.printMessage( ViewLayer.CUSTOMERS_LIST_FETCHED_MESSAGE );
-        List<Customer> customers = model.findAll( inputFile );
-        view.printCustomerList( customers );
+        view.printCustomerList( model.findAll( inputFile ) );
 
         do{
             OperationType operationType = view.getOperationType();
             List<Customer> currentCustomersList = switch( operationType ){
-                case ALPHABETIC_ORDER -> service.getCustomersInAlphabeticOrder(customers);
+                case ALPHABETIC_ORDER -> service.getCustomersInAlphabeticOrder(model.findAll( inputFile ));
                 case CARD_NUMBER_RANGE -> {
                     long leftBound = view.getLeftBoundOfRange();
                     long rightBound = view.getRightBoundOfRange();
-                    yield service.getCustomersByCardNumberInRange(customers, leftBound, rightBound);
+                    yield service.getCustomersByCardNumberInRange(model.findAll( inputFile ), leftBound, rightBound);
                 }
             };
             view.printCustomerList( currentCustomersList );
@@ -63,6 +62,7 @@ public class Controller {
             boolean savingDesired = view.saveDialog();
 
             if( savingDesired ){
+                //засунуть в сервис
                 File fileToSave = view.saveFileGetting();
                 if( fileToSave != null ){
                     logger.info("Result of current computation saved.");
