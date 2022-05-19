@@ -23,12 +23,14 @@ public class Controller {
     private final File inputFile;
 
     private static final Logger logger = LogManager.getLogger(Controller.class);
+
     public Controller(){
+        logger.debug("Initialization of project started.");
         Properties properties = new Properties();
         try {
             properties.load(new FileReader("src/main/resources/application.properties"));
         } catch (IOException e) {
-            logger.error( "File reading exception ( application.properties ) : " + e );
+            logger.fatal( "File reading exception ( application.properties ) : " + e );
             System.exit(1337);
         }
         view = new ViewLayer();
@@ -39,6 +41,7 @@ public class Controller {
 
 
     public void start() {
+        logger.info("Application has been started.");
         view.printMessage( ViewLayer.HELLO_MESSAGE );
 
         view.printMessage( ViewLayer.CUSTOMERS_LIST_FETCHED_MESSAGE );
@@ -62,13 +65,14 @@ public class Controller {
             if( savingDesired ){
                 File fileToSave = view.saveFileGetting();
                 if( fileToSave != null ){
+                    logger.info("Result of current computation saved.");
                     model.saveAll(fileToSave, currentCustomersList);
                     view.printMessage( ViewLayer.EVERYTHING_SAVED  );
                 }
             }
 
         }while( view.performAnotherOperation() );
-
+        logger.info("Application has been finished successfully.");
     }
 
 

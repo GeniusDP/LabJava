@@ -1,6 +1,5 @@
 package kpi.third.term.java.lab.customers.utilities;
 
-import kpi.third.term.java.lab.customers.controllers.MainController;
 import kpi.third.term.java.lab.customers.exceptions.JsonParserException;
 import kpi.third.term.java.lab.customers.models.entities.Customer;
 import org.apache.log4j.LogManager;
@@ -27,10 +26,10 @@ public class FileProcessor {
 
             lst = jsonParser.jsonToListOfCustomers( wholeFile );
         } catch (IOException e){
-            logger.error( "Error in FileProcessor.getAllCustomersFromFile : IOException." );
+            logger.fatal( "Error in FileProcessor.getAllCustomersFromFile : " + e.getMessage() );
             System.exit(1337);
         } catch (JsonParserException e) {
-            logger.error( e.getMessage() );
+            logger.fatal( "Error in FileProcessor.getAllCustomersFromFile :" + e.getMessage() );
             System.exit(1337);
         }
         return lst;
@@ -45,10 +44,10 @@ public class FileProcessor {
             printWriter.print( json );
         }catch(IOException e){
             String msg = "Error during saving result into file " + fileToSave.getAbsolutePath() + " : " + e.getMessage();
-            logger.error( msg );
+            logger.fatal( msg );
             System.exit(1337);
         } catch (JsonParserException e) {
-            logger.error( e.getMessage() );
+            logger.fatal( e.getMessage() );
             System.exit(1337);
         }
 
