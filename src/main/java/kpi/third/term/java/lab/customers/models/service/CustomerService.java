@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class CustomerService {
 
-    private Repository repository;
+    private final Repository repository;
 
     public CustomerService(Repository repository) {
         this.repository = repository;
