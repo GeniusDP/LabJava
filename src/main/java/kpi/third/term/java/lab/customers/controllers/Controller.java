@@ -2,8 +2,8 @@ package kpi.third.term.java.lab.customers.controllers;
 
 import kpi.third.term.java.lab.customers.models.service.CustomerService;
 import kpi.third.term.java.lab.customers.models.entities.Customer;
-import kpi.third.term.java.lab.customers.models.repositories.JSONModel;
-import kpi.third.term.java.lab.customers.models.repositories.ModelLayer;
+import kpi.third.term.java.lab.customers.models.repositories.JSONRepository;
+import kpi.third.term.java.lab.customers.models.repositories.Repository;
 import kpi.third.term.java.lab.customers.models.utilities.OperationType;
 import kpi.third.term.java.lab.customers.views.ViewLayer;
 import org.apache.log4j.LogManager;
@@ -17,7 +17,7 @@ import java.util.Properties;
 
 public class Controller {
 
-    private final ModelLayer model;
+    private final Repository model;
     private final ViewLayer view;
     private final CustomerService service;
     private final File inputFile;
@@ -34,7 +34,7 @@ public class Controller {
             System.exit(1337);
         }
         view = new ViewLayer();
-        model = new JSONModel();
+        model = new JSONRepository();
         service = new CustomerService();
         inputFile = new File( properties.getProperty("main-file-path") );
     }

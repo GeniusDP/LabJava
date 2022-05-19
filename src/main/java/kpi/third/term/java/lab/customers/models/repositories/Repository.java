@@ -5,7 +5,7 @@ import kpi.third.term.java.lab.customers.models.entities.Customer;
 import java.io.File;
 import java.util.List;
 
-public interface ModelLayer {
+public interface Repository {
 
     List<Customer> findAll(File file);
 

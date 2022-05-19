@@ -6,11 +6,11 @@ import kpi.third.term.java.lab.customers.models.utilities.FileProcessor;
 import java.io.File;
 import java.util.List;
 
-public class JSONModel implements ModelLayer {
+public class JSONRepository implements Repository {
 
     private final FileProcessor fileProcessor;
 
-    public JSONModel(){
+    public JSONRepository(){
         fileProcessor = new FileProcessor();
     }
 
