@@ -1,4 +1,4 @@
-package kpi.third.term.java.lab.customers.controllers.service;
+package kpi.third.term.java.lab.customers.models.service;
 
 import kpi.third.term.java.lab.customers.models.entities.Customer;
 

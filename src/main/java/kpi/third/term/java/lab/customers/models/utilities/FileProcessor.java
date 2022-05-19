@@ -1,6 +1,6 @@
-package kpi.third.term.java.lab.customers.utilities;
+package kpi.third.term.java.lab.customers.models.utilities;
 
-import kpi.third.term.java.lab.customers.exceptions.JsonParserException;
+import kpi.third.term.java.lab.customers.models.exceptions.JsonParserException;
 import kpi.third.term.java.lab.customers.models.entities.Customer;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
