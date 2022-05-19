@@ -17,11 +17,9 @@ import java.util.Properties;
 
 public class Controller {
 
-    private final Repository model;
+    private final Repository repository;
     private final ViewLayer view;
     private final CustomerService service;
-    private final File inputFile;
-
     private static final Logger logger = LogManager.getLogger(Controller.class);
 
     public Controller(){
@@ -34,9 +32,8 @@ public class Controller {
             System.exit(1337);
         }
         view = new ViewLayer();
-        model = new JSONRepository();
+        repository = new JSONRepository( new File( properties.getProperty("main-file-path") ) );
         service = new CustomerService();
-        inputFile = new File( properties.getProperty("main-file-path") );
     }
 
 
@@ -45,16 +42,16 @@ public class Controller {
         view.printMessage( ViewLayer.HELLO_MESSAGE );
 
         view.printMessage( ViewLayer.CUSTOMERS_LIST_FETCHED_MESSAGE );
-        view.printCustomerList( model.findAll( inputFile ) );
+        view.printCustomerList( repository.findAll( ) );
 
         do{
             OperationType operationType = view.getOperationType();
             List<Customer> currentCustomersList = switch( operationType ){
-                case ALPHABETIC_ORDER -> service.getCustomersInAlphabeticOrder(model.findAll( inputFile ));
+                case ALPHABETIC_ORDER -> service.getCustomersInAlphabeticOrder(repository.findAll( ));
                 case CARD_NUMBER_RANGE -> {
                     long leftBound = view.getLeftBoundOfRange();
                     long rightBound = view.getRightBoundOfRange();
-                    yield service.getCustomersByCardNumberInRange(model.findAll( inputFile ), leftBound, rightBound);
+                    yield service.getCustomersByCardNumberInRange(repository.findAll( ), leftBound, rightBound);
                 }
             };
             view.printCustomerList( currentCustomersList );
@@ -66,7 +63,7 @@ public class Controller {
                 File fileToSave = view.saveFileGetting();
                 if( fileToSave != null ){
                     logger.info("Result of current computation saved.");
-                    model.saveAll(fileToSave, currentCustomersList);
+                    repository.saveAll(fileToSave, currentCustomersList);
                     view.printMessage( ViewLayer.EVERYTHING_SAVED  );
                 }
             }

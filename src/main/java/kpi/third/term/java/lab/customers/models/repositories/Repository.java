@@ -5,10 +5,15 @@ import kpi.third.term.java.lab.customers.models.entities.Customer;
 import java.io.File;
 import java.util.List;
 
-public interface Repository {
+public abstract class Repository {
+    protected File dataSource;
 
-    List<Customer> findAll(File file);
+    public Repository(File dataSource) {
+        this.dataSource = dataSource;
+    }
 
-    void saveAll(File fileToSave, List<Customer> customers);
+    public abstract List<Customer> findAll();
+
+    public abstract void saveAll(File fileToSave, List<Customer> customers);
 
 }
