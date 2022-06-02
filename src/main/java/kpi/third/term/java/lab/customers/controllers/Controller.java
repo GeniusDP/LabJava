@@ -1,5 +1,6 @@
 package kpi.third.term.java.lab.customers.controllers;
 
+import kpi.third.term.java.lab.customers.models.exceptions.JsonParserException;
 import kpi.third.term.java.lab.customers.models.service.CustomerService;
 import kpi.third.term.java.lab.customers.models.entities.Customer;
 import kpi.third.term.java.lab.customers.models.repositories.JSONRepository;
@@ -22,15 +23,19 @@ public class Controller {
 
     public Controller(){
         logger.debug("Initialization of project started.");
+
+        this.view = new ViewLayer();
+
         Properties properties = new Properties();
         try {
-            properties.load(new FileReader("src/main/resources/application.properties"));
+            properties.load(new FileReader("src/main/resources/applications.properties"));
         } catch (IOException e) {
-            logger.fatal( "File reading exception ( application.properties ) : " + e );
+            view.printMessage( ViewLayer.ERROR_DURING_LOADING_DATA );
+            logger.fatal( "Error during accessing config file " + e );
             System.exit(1337);
         }
-        view = new ViewLayer();
-        service = new CustomerService( new JSONRepository( new File( properties.getProperty("main-file-path") ) ) );
+
+        service = new CustomerService( new JSONRepository( new File( properties.getProperty( "main-file-path" ) ) ) );
     }
 
 
@@ -39,8 +44,25 @@ public class Controller {
         view.printMessage( ViewLayer.HELLO_MESSAGE );
         view.printMessage( ViewLayer.CUSTOMERS_LIST_FETCHED_MESSAGE );
 
-        view.printCustomerList( service.findAll( ) );
+        try{
 
+            mainControllerJob();
+
+        }catch (IOException e){
+            view.printMessage(ViewLayer.ERROR_DURING_LOADING_DATA);
+            logger.fatal( "Error during working with storage." );
+            System.exit(1337);
+        } catch (JsonParserException e) {
+            view.printMessage(ViewLayer.ERROR_DURING_PARSING_LOADED_DATA);
+            logger.fatal( "Error during parsing data." );
+            System.exit(1337);
+        }
+
+        logger.info("Application has been finished successfully.");
+    }
+
+    private void mainControllerJob() throws IOException, JsonParserException{
+        view.printCustomerList( service.findAll( ) );
         do{
             OperationType operationType = view.getOperationType();
             List<Customer> currentCustomersList = switch( operationType ){
@@ -65,7 +87,6 @@ public class Controller {
             }
 
         }while( view.performAnotherOperation() );
-        logger.info("Application has been finished successfully.");
     }
 
 

@@ -15,6 +15,9 @@ public class ViewLayer {
     public static final String WRITE_PLS_TYPE_OF_OPERATION = "Write please type of operation needed.";
     public static final String WRITE_RANGE = "Write 'range' (without quotes) - customers in range by card number";
     public static final String WRITE_ALPHABETIC = "Write 'alphabetic' (without quotes) - customers in alphabetic order";
+    public static final String ERROR_DURING_LOADING_DATA = "Loading data from the storage finished with an error";
+    public static final String ERROR_DURING_PARSING_LOADED_DATA = "Parsing loaded from the storage finished with an error";
+
 
     private static final String REWRITE_PLEASE = "Rewrite please!";
     private static final String RESOURCES_FILES_PREFIX = "src/main/resources/";
@@ -26,6 +29,10 @@ public class ViewLayer {
 
 
     public void printCustomerList(List<Customer> customers) {
+        if(customers == null || customers.isEmpty()){
+            System.out.println("The list of customers is empty: []");
+            return;
+        }
         printMessage( "This is a list of customers you needed:" );
         customers.forEach( System.out::println );
     }
