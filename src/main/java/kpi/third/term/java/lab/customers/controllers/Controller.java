@@ -28,7 +28,7 @@ public class Controller {
 
         Properties properties = new Properties();
         try {
-            properties.load(new FileReader("src/main/resources/applications.properties"));
+            properties.load(new FileReader("src/main/resources/application.properties"));
         } catch (IOException e) {
             view.printMessage( ViewLayer.ERROR_DURING_LOADING_DATA );
             logger.fatal( "Error during accessing config file " + e );
